@@ -17,16 +17,14 @@ import pandas as pd
 def main():
     '''Create scorecard'''
     
-    ## Read specific columns by name
-    df_names = pd.read_excel('GolfCoursePar.xlsx', usecols=["Brevofield", "Quaker Creek", "Knights Play"])
-    #bf = df_names["Brevofield"]
-    #qc = df_names["Quaker Creek"]
-    #kp = df_names["Knights Play"]
-    
     ## Read specific columns by index
-    bf = pd.read_excel('GolfCoursePar.xlsx', usecols=[0, 1])
-    qc = pd.read_excel('GolfCoursePar.xlsx', usecols=[0, 2])
-    kp = pd.read_excel('GolfCoursePar.xlsx', usecols=[0, 3])
+    df_names = pd.read_excel('GolfCoursePar.xlsx', usecols=["Knights Play", "Brevofield", "Quaker Creek", "Raleigh Golf", "Zebulon CC"])
+    
+    kp = pd.read_excel('GolfCoursePar.xlsx', usecols=[0, 1])
+    bf = pd.read_excel('GolfCoursePar.xlsx', usecols=[0, 2])
+    qc = pd.read_excel('GolfCoursePar.xlsx', usecols=[0, 3])
+    rg = pd.read_excel('GolfCoursePar.xlsx', usecols=[0, 4])
+    zc = pd.read_excel('GolfCoursePar.xlsx', usecols=[0, 5])
     
     # Title of the app
     st.logo("assets/pgt_logo2_blk.jpg", size="large")
@@ -45,22 +43,28 @@ def main():
     # Sidebar for course input
     golf_course = st.sidebar.selectbox(
             "Golf Course",
-            ("Brevofield", "Quaker Creek", "Knights Play")
+            ("Knights Play", "Brevofield", "Quaker Creek", "Raleigh GA", "Zebulon CC")
     )
     
-    nine_holes = st.sidebar.radio("Number of holes :", ['18 holes', '9 holes'], horizontal=True)
+    #nine_holes = st.sidebar.radio("Number of holes :", ['18 holes', '9 holes'], horizontal=True)
     
-    if golf_course == "Brevofield":
+    if golf_course == "Knights Play":
+        st.sidebar.write(kp)
+    elif golf_course == "Brevofield":
         st.sidebar.write(bf)
     elif golf_course == "Quaker Creek":
         st.sidebar.write(qc)
-    elif golf_course == "Knights Play":
-        st.sidebar.write(kp)
+    elif golf_course == "Raleigh GA":
+        st.sidebar.write(rg)
+    elif golf_course == "Zebulon CC":
+        st.sidebar.write(zc)
     
-    if nine_holes == '18 holes':
-        holes = [f"Hole {i}" for i in range(1, 19)]  # List of holes (1 to 18)
-    if nine_holes == '9 holes':
+    if golf_course == 'Knights Play':
         holes = [f"Hole {i}" for i in range(1, 10)]  # List of holes (1 to 9)
+    else:
+        holes = [f"Hole {i}" for i in range(1, 19)]  # List of holes (1 to 18)
+
+    st.write(f'You are playing :  **_{golf_course} Golf Course_**')
     
     # Initialize a DataFrame to store scores and points
     score_value = pd.DataFrame(index=holes, columns=player_names)
