@@ -84,7 +84,7 @@ def main():
         with column:
             st.subheader(f'{player}')
             for hole in holes:
-                score_key = st.selectbox(f"{hole} ({player})", options.keys(), use_container_width=True)
+                score_key = st.selectbox(f"{hole} ({player})", options.keys())
                 score_value.loc[hole, player] = options[score_key]
     
     scol1, scol2 = st.columns(2, gap='large')
@@ -97,7 +97,6 @@ def main():
         st.subheader("Total Scores")
         total_scores = score_value.sum(axis=0)
         for player, total in total_scores.items():
-            #st.subheader(f"Score for {player}")
             st.write(f"{player}: **{total}**")
         
 if __name__ == '__main__':
