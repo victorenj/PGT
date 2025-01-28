@@ -41,12 +41,15 @@ def main():
         player_names.append(player_name)
     
     # Sidebar for course input
-    golf_course = st.sidebar.selectbox(
-            "Golf Course",
-            ("Knights Play", "Brevofield", "Quaker Creek", "Raleigh GA", "Zebulon CC")
-    )
-    
-    #nine_holes = st.sidebar.radio("Number of holes :", ['18 holes', '9 holes'], horizontal=True)
+    course_name = ["Knights Play", "Brevofield", "Quaker Creek", "Raleigh GA", "Zebulon CC", "Custom"]
+    golf_course = st.sidebar.selectbox("Golf Course", course_name)
+
+    if golf_course == "Custom":
+        custom_input = st.sidebar.text_input("Write the name of Golf Course :")
+        if custom_input:
+            st.write(f'You are playing :  **_{custom_input} Golf Course_**')
+    else:
+        st.write(f'You are playing :  **_{golf_course} Golf Course_**')
     
     if golf_course == "Knights Play":
         st.sidebar.write(kp)
@@ -58,13 +61,11 @@ def main():
         st.sidebar.write(rg)
     elif golf_course == "Zebulon CC":
         st.sidebar.write(zc)
-    
+
     if golf_course == 'Knights Play':
         holes = [f"Hole {i}" for i in range(1, 10)]  # List of holes (1 to 9)
     else:
         holes = [f"Hole {i}" for i in range(1, 19)]  # List of holes (1 to 18)
-
-    st.write(f'You are playing :  **_{golf_course} Golf Course_**')
     
     # Initialize a DataFrame to store scores and points
     score_value = pd.DataFrame(index=holes, columns=player_names)
