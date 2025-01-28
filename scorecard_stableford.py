@@ -13,7 +13,6 @@ import streamlit as st
 import pandas as pd
 
 
-
 def main():
     '''Create scorecard'''
     
@@ -85,7 +84,7 @@ def main():
         with column:
             st.subheader(f'{player}')
             for hole in holes:
-                score_key = st.selectbox(f"{hole} ({player})", options.keys())
+                score_key = st.selectbox(f"{hole} ({player})", options.keys(), use_container_width=True)
                 score_value.loc[hole, player] = options[score_key]
     
     scol1, scol2 = st.columns(2, gap='large')
