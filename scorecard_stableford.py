@@ -4,7 +4,7 @@
 
 # ----------------------------------------------------------
 # > Open CLI
-# > cd C:\Users\PC\Desktop\PGT
+# > 
 # > .venv\Scripts\activate
 # > streamlit run scorecard_stableford.py
 # ----------------------------------------------------------
@@ -28,7 +28,6 @@ def main():
     # Title of the app
     st.logo("assets/pgt_logo2_blk.jpg", size="large")
     st.title("PGT Modified Stableford")
-    st.subheader("*Pinoy Golf Tour*")
     
     # Sidebar for player input
     st.sidebar.header("Player Information")
@@ -46,9 +45,9 @@ def main():
     if golf_course == "Custom":
         custom_input = st.sidebar.text_input("Write the name of Golf Course :")
         if custom_input:
-            st.write(f'You are playing :  **_{custom_input} Golf Course_**')
+            st.subheader(f'**_{custom_input} Golf Course_**')
     else:
-        st.write(f'You are playing :  **_{golf_course} Golf Course_**')
+        st.subheader(f'**_{golf_course} Golf Course_**')
     
     if golf_course == "Knights Play":
         st.sidebar.write(kp)
