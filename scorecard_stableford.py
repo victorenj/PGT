@@ -27,7 +27,7 @@ def main():
     
     # Title of the app
     st.logo("assets/pgt_logo2_blk.jpg", size="large")
-    st.title("PGT Stableford Scorecard")
+    st.title("PGT Modified Stableford")
     st.subheader("*Pinoy Golf Tour*")
     
     # Sidebar for player input
@@ -76,8 +76,8 @@ def main():
         'Zero': 0,
         'Bogey': 1,
         'Par': 2,
-        'Birdie': 3,
-        'Eagle': 4
+        'Birdie': 4,
+        'Eagle': 6
     }
     
     for player, column in zip(player_names, columns):
