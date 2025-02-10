@@ -4,7 +4,7 @@
 
 # ----------------------------------------------------------
 # > Open CLI
-# > 
+# > cd C:\Users\PC\Desktop\PGT
 # > .venv\Scripts\activate
 # > streamlit run scorecard_stableford.py
 # ----------------------------------------------------------
@@ -12,6 +12,13 @@
 import streamlit as st
 import pandas as pd
 
+
+st.set_page_config(
+    page_title="PGT Scorecard",
+    page_icon=":golfer:",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 def main():
     '''Create scorecard'''
@@ -29,7 +36,7 @@ def main():
     st.logo("assets/pgt_logo2_blk.jpg", size="large")
     st.title("PGT Modified Stableford")
     
-    # Sidebar for player input
+    # --- Sidebar for player input ---
     st.sidebar.header("Player Information")
     num_players = st.sidebar.number_input("Number of Players", min_value=1, max_value=4, value=1)
     player_names = []
@@ -37,8 +44,8 @@ def main():
     for i in range(num_players):
         player_name = st.sidebar.text_input(f"Enter name for Player {i + 1}", value=f"Player {i + 1}")
         player_names.append(player_name)
-    
-    # Sidebar for course input
+    # --- Sidebar for player input ---
+    # --- Sidebar for course input ---
     course_name = ["Knights Play", "Brevofield", "Quaker Creek", "Raleigh GA", "Zebulon CC", "Custom"]
     golf_course = st.sidebar.selectbox("Golf Course", course_name)
 
@@ -60,16 +67,10 @@ def main():
     elif golf_course == "Zebulon CC":
         st.sidebar.write(zc)
 
-    if golf_course == 'Knights Play':
-        holes = [f"Hole {i}" for i in range(1, 10)]  # List of holes (1 to 9)
-    else:
-        holes = [f"Hole {i}" for i in range(1, 19)]  # List of holes (1 to 18)
-    
-    # Initialize a DataFrame to store scores and points
+    # --- Hole & total scores ---
+    holes = [f"Hole {i}" for i in range(1, 19)]  # List of holes (1 to 18)
     score_value = pd.DataFrame(index=holes, columns=player_names)
-    
-    # Input scores for each hole and player
-    columns = st.columns(4, gap="small", vertical_alignment="center")
+    columns = st.columns(18, gap="small", vertical_alignment="top")
     
     options = {
         'Zero': 0,
@@ -79,10 +80,10 @@ def main():
         'Eagle': 6
     }
     
-    for player, column in zip(player_names, columns):
+    for hole, column in zip(holes, columns):
         with column:
-            st.subheader(f'{player}')
-            for hole in holes:
+            #st.subheader(f'{player}')
+            for player in player_names:
                 score_key = st.selectbox(f"{hole} ({player})", options.keys())
                 score_value.loc[hole, player] = options[score_key]
     
@@ -97,6 +98,7 @@ def main():
         total_scores = score_value.sum(axis=0)
         for player, total in total_scores.items():
             st.write(f"{player}: **{total}**")
-        
+    # --- Hole & total scores ---
+
 if __name__ == '__main__':
     main()
