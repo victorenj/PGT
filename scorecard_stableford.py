@@ -75,9 +75,9 @@ def main():
     options = {
         'Zero': 0,
         'Bogey': 1,
-        'Par': 2,
-        'Birdie': 4,
-        'Eagle': 6
+        'Par': 3,
+        'Birdie': 6,
+        'Eagle': 10
     }
     
     for hole, column in zip(holes, columns):
