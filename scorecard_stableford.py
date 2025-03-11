@@ -59,7 +59,6 @@ def main():
         st.error(f"An error occurred while loading the file: {e}")
 
     if selected_course != "Custom":
-        st.write("*Scorecard*")
         st.dataframe(df)
 
     # --- Hole & total scores ---
@@ -90,7 +89,6 @@ def main():
     with scol2:
         total_scores = score_value.sum(axis=1).astype(int)
         total_scores_df = total_scores.to_frame(name='Total Score')
-        #st.dataframe(total_scores_df)
 
         if not total_scores.empty:
             max_score = total_scores.max()
