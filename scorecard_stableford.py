@@ -27,7 +27,7 @@ def main():
         player_names.append(player_name)
 
     # --- Sidebar for course input ---
-    st.sidebar.header("Course Information")
+    st.sidebar.header("Golf Course Information")
     course_name = ["Knights Play", "Brevofield", "Quaker Creek", "Raleigh GA", "Zebulon CC", "Custom"]
     selected_course = st.sidebar.selectbox("Golf Course", course_name)
 
